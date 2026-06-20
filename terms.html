@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Termos de Uso e Privacidade - AutoUp</title>
+    <meta name="title" content="Termos de Uso e Privacidade - AutoUp">
+    <meta name="description" content="Diretrizes de processamento, coleta e uso de dados da rede de parcerias AutoUp.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#10b981">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; background: #07070b; color: #fff; font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+        
+        canvas#bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #07070b; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Navegação */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 5%;
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 4px;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .logo span { color: #10b981; }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links > a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links > a:hover { color: #fff; }
+
+        .btn-back {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 24px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Container do Documento */
+        .legal-section {
+            flex: 1;
+            padding: 40px 5%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .legal-box {
+            background: rgba(10, 10, 15, 0.4);
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 60px;
+            max-width: 900px;
+            width: 100%;
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) 0.2s both;
+        }
+
+        .legal-header {
+            margin-bottom: 50px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 30px;
+        }
+
+        .legal-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 4px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .legal-header .last-updated {
+            font-size: 1rem;
+            color: #10b981;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .legal-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.9);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .legal-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .legal-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .legal-content strong {
+            color: rgba(255,255,255,0.85);
+            font-weight: 600;
+        }
+
+        .legal-content ul {
+            list-style-type: none;
+            margin-bottom: 24px;
+        }
+
+        .legal-content ul li {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .legal-content ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: #10b981;
+            border-radius: 50%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.3);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-top: auto;
+        }
+
+        @media(max-width: 768px) {
+            .legal-box { padding: 40px 24px; }
+            .legal-header h1 { font-size: 2.5rem; }
+            .legal-content p, .legal-content ul li { font-size: 1rem; }
+            .nav-links > a:not(.btn-back) { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg" width="0" height="0"></canvas>
+    
+    <div class="wrapper">
+        <nav>
+            <a href="/" class="logo">AUTO<span>UP</span></a>
+            <div class="nav-links">
+                <a href="/" class="btn-back"><i class="fas fa-arrow-left"></i> VOLTAR AO INÍCIO</a>
+            </div>
+        </nav>
+
+        <section class="legal-section">
+            <div class="legal-box">
+                <div class="legal-header">
+                    <h1>TERMOS DE USO E POLÍTICA DE PRIVACIDADE</h1>
+                    <div class="last-updated">Última atualização: 15 de junho de 2026</div>
+                </div>
+                
+                <div class="legal-content">
+                    <h2>1. Introdução</h2>
+                    <p>Estes Termos de Uso e Política de Privacidade governam a utilização do bot AutoUp, desenvolvido e mantido por LP77. Ao adicionar e configurar o bot AutoUp em seu servidor do Discord, o administrador do servidor concorda integralmente com as diretrizes de processamento, coleta e uso de dados estabelecidas neste documento.</p>
+
+                    <h2>2. Coleta de Dados</h2>
+                    <p>O AutoUp opera sob o princípio estrito de minimização de dados, armazenando unicamente as informações vitais para a operação e segurança da rede P2P de parcerias. Os dados processados e armazenados em nossa infraestrutura incluem:</p>
+                    <ul>
+                        <li><strong>Identificadores da Plataforma:</strong> ID do servidor (Guild ID), ID do proprietário (Owner ID) e ID do canal de texto designado para a integração contínua.</li>
+                        <li><strong>Conteúdo Autorizado:</strong> O texto descritivo de divulgação configurado manualmente e submetido pelo administrador.</li>
+                        <li><strong>Telemetria de Rede:</strong> Links de convite gerados exclusivamente pelo motor interno do bot e estatísticas quantitativas de tráfego (contagem total de membros e incremento de usos atrelados ao link oficial).</li>
+                    </ul>
+                    <p><strong>Restrição de Escopo:</strong> O AutoUp não coleta, não lê, não escuta e não retém o conteúdo de mensagens enviadas por usuários, dados de presença, histórico de chats, logs de auditoria não relacionados ou quaisquer informações de identificação pessoal (PII) de membros individuais.</p>
+
+                    <h2>3. Uso das Informações</h2>
+                    <p>Os dados coletados são utilizados exclusivamente para as seguintes finalidades sistêmicas:</p>
+                    <ul>
+                        <li>Alimentar o ciclo de automação assíncrona do motor P2P, distribuindo a mensagem de divulgação do seu servidor para a fila de comunidades parceiras.</li>
+                        <li>Interceptar eventos de entrada de novos usuários (Gateway Events) para calcular a taxa de conversão e validar a integridade dos convites em cache.</li>
+                        <li>Processar métricas quantitativas de alcance, status de nós da rede e gerar rankings de uso internos aos comandos do bot.</li>
+                    </ul>
+
+                    <h2>4. Segurança e Compartilhamento</h2>
+                    <p>A estrutura JSON de configuração dos servidores é mantida em ambiente isolado e processada em cache de memória (RAM) para mitigar exposições de disco (I/O). A administração (LP77) não vende, não cede, não aluga e não compartilha os metadados coletados com entidades terceiras sob nenhuma circunstância.</p>
+
+                    <h2>5. Retenção e Exclusão de Dados</h2>
+                    <p>O controle e jurisdição sobre os dados cedidos pertencem ao proprietário do servidor.</p>
+                    <ul>
+                        <li><strong>Inativação Temporária:</strong> O administrador pode interromper o fluxo de parcerias a qualquer momento através da revogação do canal ativo via comandos do bot.</li>
+                        <li><strong>Revogação Definitiva:</strong> A expulsão ou remoção do bot do servidor cessa imediatamente a coleta de novos dados e marca o nó como inativo na rede global. Para a expurgação física dos metadados residuais no banco de dados da aplicação, o administrador detentor do Owner ID pode abrir uma solicitação direta via canal de atendimento.</li>
+                    </ul>
+
+                    <h2>6. Conformidade com a API do Discord</h2>
+                    <p>O software opera em conformidade mandatória com os Termos de Serviço da API e as Diretrizes para Desenvolvedores do Discord. A Intenção Privilegiada (Privileged Intent) de Server Members é consumida estritamente para o cálculo diferencial de uso de convites (fetchInvites) na entrada de um membro, não havendo rastreamento persistente, profiling ou construção de banco de dados de usuários externos ao escopo da automação de parcerias.</p>
+
+                    <h2>7. Contato e Suporte</h2>
+                    <p>Para relatórios de vulnerabilidade, dúvidas sobre conformidade de dados ou requisições técnicas de exclusão, os mantenedores dos servidores devem se reportar exclusivamente ao servidor de suporte oficial do protocolo AutoUp no Discord.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 AutoUp. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('bg');
+        var ctx = canvas.getContext('2d');
+        var W, H;
+        var mouseX = -9999, mouseY = -9999;
+        var isMobile = window.innerWidth < 768;
+        var mouseRadius = isMobile ? 80 : 120;
+
+        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        resize();
+
+        document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
+        document.addEventListener('mouseleave', function() { mouseX = -9999; mouseY = -9999; });
+
+        function Dust() { this.init(); }
+        Dust.prototype.init = function() {
+            this.x = Math.random() * W; 
+            this.y = Math.random() * H;
+            this.r = Math.random() * 1.5 + 0.5; 
+            this.vx = (Math.random() - 0.5) * 0.3; 
+            this.vy = (Math.random() - 0.5) * 0.3;
+            this.a = Math.random() * 0.15 + 0.05; 
+            this.ph = Math.random() * Math.PI * 2;
+        };
+        Dust.prototype.update = function() {
+            var dx = this.x - mouseX, dy = this.y - mouseY;
+            var distSq = dx * dx + dy * dy;
+            var radiusSq = mouseRadius * mouseRadius;
+            
+            if(distSq < radiusSq && distSq > 0) {
+                var dist = Math.sqrt(distSq);
+                var f = (mouseRadius - dist) / mouseRadius * 0.2; 
+                this.x += (dx / dist) * f; 
+                this.y += (dy / dist) * f;
+            }
+            
+            this.x += this.vx; 
+            this.y += this.vy; 
+            this.ph += 0.01; 
+            
+            if(this.x < -10) this.x = W + 10; 
+            if(this.x > W + 10) this.x = -10;
+            if(this.y < -10) this.y = H + 10; 
+            if(this.y > H + 10) this.y = -10;
+        };
+        Dust.prototype.draw = function() {
+            var currentAlpha = this.a + Math.sin(this.ph) * 0.05;
+            
+            ctx.fillStyle = 'rgba(255, 255, 255, ' + Math.max(0, currentAlpha) + ')';
+            ctx.beginPath(); 
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); 
+            ctx.fill();
+        };
+
+        var dustCount = isMobile ? 100 : 250;
+        var dustArray = []; 
+        for(var i = 0; i < dustCount; i++) dustArray.push(new Dust());
+
+        function renderFrame() {
+            ctx.clearRect(0, 0, W, H);
+            for(var i = 0; i < dustArray.length; i++) { 
+                dustArray[i].update(); 
+                dustArray[i].draw(); 
+            }
+        }
+
+        var fpsInterval = 1000 / 30; 
+        var then = performance.now();
+
+        function animate(newtime) {
+            requestAnimationFrame(animate);
+            var now = newtime;
+            var elapsed = now - then;
+            
+            if (elapsed > fpsInterval) {
+                then = now - (elapsed % fpsInterval);
+                renderFrame();
+            }
+        }
+        requestAnimationFrame(animate);
+
+        var rT;
+        function handleResize() {
+            resize();
+            for(var i = 0; i < dustArray.length; i++) dustArray[i].init();
+            renderFrame();
+        }
+        window.addEventListener('resize', function() { clearTimeout(rT); rT = setTimeout(handleResize, 120); });
+    </script>
+</body>
+</html>

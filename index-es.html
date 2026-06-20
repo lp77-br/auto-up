@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>AutoUp Alianzas - Bot para Discord</title>
+    <meta name="title" content="AutoUp Alianzas - Bot para Discord">
+    <meta name="description" content="AutoUp es una red P2P de alianzas y crecimiento orgánico para Discord. 100% gratuita y automatizada. Conecta tu servidor y expande tu comunidad.">
+    <meta name="keywords" content="discord bot, bot de alianzas, bot de publicidad discord, crecimiento orgánico discord, p2p discord, promocionar servidor discord, autoup">
+    <meta name="author" content="AutoUp Network">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#10b981">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://auto-up.lp77.one/es/">
+    <meta property="og:title" content="AutoUp Alianzas - Bot para Discord">
+    <meta property="og:description" content="Una red P2P de alianzas automatizada y 100% gratuita. Conecta tu servidor y deja que el motor de reciprocidad haga el resto.">
+    <meta property="og:image" content="https://auto-up.lp77.one/assets/og-image.png">
+    <meta property="og:site_name" content="AutoUp">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://auto-up.lp77.one/es/">
+    <meta property="twitter:title" content="AutoUp Alianzas - Bot para Discord">
+    <meta property="twitter:description" content="Una red P2P de alianzas automatizada y 100% gratuita. Conecta tu servidor y expande tu comunidad.">
+    <meta property="twitter:image" content="https://auto-up.lp77.one/assets/og-image.png">
+
+    <link rel="canonical" href="https://auto-up.lp77.one/es/">
+    <link rel="alternate" hreflang="pt-br" href="https://auto-up.lp77.one/">
+    <link rel="alternate" hreflang="en" href="https://auto-up.lp77.one/en/">
+    <link rel="alternate" hreflang="es" href="https://auto-up.lp77.one/es/">
+    <link rel="alternate" hreflang="x-default" href="https://auto-up.lp77.one/">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow-x: hidden; background: #07070b; color: #fff; font-family: 'Rajdhani', sans-serif; }
+        
+        canvas#bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #07070b; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 5%;
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 4px;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .logo span { color: #10b981; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            padding-right: 30px;
+        }
+
+        .lang-switch a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .lang-switch a:hover { color: rgba(255,255,255,0.8); }
+        .lang-switch a.active { color: #10b981; pointer-events: none; }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links > a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links > a:hover { color: #fff; }
+
+        .btn-login {
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 24px;
+            border-radius: 8px;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 80vh;
+            padding: 0 5%;
+        }
+
+        .hero-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #10b981;
+            margin-bottom: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) 0.1s both;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            letter-spacing: 8px;
+            max-width: 900px;
+            margin-bottom: 24px;
+            background: linear-gradient(120deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.4) 70%, rgba(255,255,255,1) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) 0.2s both, shimmer 8s linear infinite;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.5);
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) 0.3s both;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) 0.4s both;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: #000;
+            padding: 16px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: background 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .hero-tos {
+            margin-top: 24px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) 0.5s both;
+        }
+
+        .hero-tos:hover {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .features {
+            padding: 80px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 16px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            animation: fadeUp .6s cubic-bezier(.16,1,.3,1) 0.5s both;
+            word-wrap: break-word;
+        }
+
+        .feature-card:hover {
+            background: rgba(255,255,255,0.04);
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #10b981;
+            margin-bottom: 24px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .feature-card p {
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.3);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        @media(max-width: 900px) {
+            .nav-right { flex-direction: column; align-items: flex-end; gap: 15px; }
+            .lang-switch { border-right: none; padding-right: 0; }
+            .nav-links { display: none; }
+        }
+
+        @media(max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .hero-btns { flex-direction: column; width: 100%; max-width: 300px; }
+            .btn-primary, .btn-secondary { width: 100%; text-align: center; justify-content: center; }
+            .features { padding: 60px 5%; }
+            .feature-card { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bg" width="0" height="0"></canvas>
+    
+    <div class="wrapper">
+        <nav>
+            <a href="/" class="logo">AUTO<span>UP</span></a>
+            <div class="nav-right">
+                <div class="lang-switch">
+                    <a href="/">PT</a>
+                    <a href="/en/">EN</a>
+                    <a href="/es/" class="active">ES</a>
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Características</a>
+                    <a href="/pages/login" class="btn-login">Panel de Control</a>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-tag">V2.0</div>
+            <h1>BOT DE ALIANZAS DISCORD</h1>
+            <p>Una red P2P de alianzas automatizada. Conecta tu servidor, configura tu anuncio y deja que el motor de reciprocidad haga el resto.</p>
+            <div class="hero-btns">
+                <a href="https://discord.com/oauth2/authorize?client_id=1460812208169549926&permissions=1073742881&scope=bot%20applications.commands" class="btn-primary" target="_blank" rel="noopener noreferrer">AÑADIR A DISCORD</a>
+                <a href="https://discord.gg/FHaRZtsqyR" class="btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> NUESTRO DISCORD</a>
+            </div>
+            <a href="/es/terms" class="hero-tos">Ver TyC</a>
+        </section>
+
+        <section class="features" id="features">
+            <div class="feature-card">
+                <i class="fas fa-network-wired feature-icon"></i>
+                <h3>RECIPROCIDAD P2P</h3>
+                <p>Nuestra red opera en un sistema de intercambio justo. Mantén un canal activo recibiendo anuncios de socios y tu servidor será divulgado globalmente a cambio.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>SISTEMA ANTI-ABUSO</h3>
+                <p>Los filtros de sanitización eliminan menciones y enlaces externos no autorizados automáticamente. Mantenemos una estética limpia para evitar la contaminación en tu servidor.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line feature-icon"></i>
+                <h3>MÉTRICAS PRECISAS</h3>
+                <p>Deja de adivinar tu retorno. AutoUp genera invitaciones únicas y rastrea en tiempo real exactamente cuántos miembros entraron a través de nuestra red.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-bolt feature-icon"></i>
+                <h3>SISTEMA DE CRÉDITOS</h3>
+                <p>Sin planes premium. Cada servidor recibe créditos diarios, que se reinician estrictamente a las 16:00 (BRT), garantizando una rotación equitativa en la cola de divulgación.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-unlock feature-icon"></i>
+                <h3>TOTALMENTE GRATUITO</h3>
+                <p>No necesitas pagar absolutamente nada para usarlo. El bot es de libre acceso, sin funciones ocultas. La red se sostiene exclusivamente por donaciones voluntarias de quienes desean apoyarla.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-server feature-icon"></i>
+                <h3>ESTABILIDAD NATIVA</h3>
+                <p>Arquitectura basada en eventos asíncronos que evita los Rate Limits. Tu anuncio se entrega a un ritmo seguro sin sufrir bloqueos por parte de Discord.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 AutoUp. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        var canvas = document.getElementById('bg');
+        var ctx = canvas.getContext('2d');
+        var W, H;
+        var mouseX = -9999, mouseY = -9999;
+        var isMobile = window.innerWidth < 768;
+        var mouseRadius = isMobile ? 80 : 120;
+
+        function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        resize();
+
+        document.addEventListener('mousemove', function(e) { mouseX = e.clientX; mouseY = e.clientY; });
+        document.addEventListener('mouseleave', function() { mouseX = -9999; mouseY = -9999; });
+
+        function Dust() { this.init(); }
+        Dust.prototype.init = function() {
+            this.x = Math.random() * W; 
+            this.y = Math.random() * H;
+            this.r = Math.random() * 1.5 + 0.5; 
+            this.vx = (Math.random() - 0.5) * 0.3; 
+            this.vy = (Math.random() - 0.5) * 0.3;
+            this.a = Math.random() * 0.15 + 0.05; 
+            this.ph = Math.random() * Math.PI * 2;
+        };
+        Dust.prototype.update = function() {
+            var dx = this.x - mouseX, dy = this.y - mouseY;
+            var distSq = dx * dx + dy * dy;
+            var radiusSq = mouseRadius * mouseRadius;
+            
+            if(distSq < radiusSq && distSq > 0) {
+                var dist = Math.sqrt(distSq);
+                var f = (mouseRadius - dist) / mouseRadius * 0.2; 
+                this.x += (dx / dist) * f; 
+                this.y += (dy / dist) * f;
+            }
+            
+            this.x += this.vx; 
+            this.y += this.vy; 
+            this.ph += 0.01; 
+            
+            if(this.x < -10) this.x = W + 10; 
+            if(this.x > W + 10) this.x = -10;
+            if(this.y < -10) this.y = H + 10; 
+            if(this.y > H + 10) this.y = -10;
+        };
+        Dust.prototype.draw = function() {
+            var currentAlpha = this.a + Math.sin(this.ph) * 0.05;
+            
+            ctx.fillStyle = 'rgba(255, 255, 255, ' + Math.max(0, currentAlpha) + ')';
+            ctx.beginPath(); 
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); 
+            ctx.fill();
+        };
+
+        var dustCount = isMobile ? 100 : 250;
+        var dustArray = []; 
+        for(var i = 0; i < dustCount; i++) dustArray.push(new Dust());
+
+        function renderFrame() {
+            ctx.clearRect(0, 0, W, H);
+            for(var i = 0; i < dustArray.length; i++) { 
+                dustArray[i].update(); 
+                dustArray[i].draw(); 
+            }
+        }
+
+        var fpsInterval = 1000 / 30; 
+        var then = performance.now();
+
+        function animate(newtime) {
+            requestAnimationFrame(animate);
+            var now = newtime;
+            var elapsed = now - then;
+            
+            if (elapsed > fpsInterval) {
+                then = now - (elapsed % fpsInterval);
+                renderFrame();
+            }
+        }
+        requestAnimationFrame(animate);
+
+        var rT;
+        function handleResize() {
+            resize();
+            for(var i = 0; i < dustArray.length; i++) dustArray[i].init();
+            renderFrame();
+        }
+        window.addEventListener('resize', function() { clearTimeout(rT); rT = setTimeout(handleResize, 120); });
+    </script>
+</body>
+</html>
